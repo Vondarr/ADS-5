@@ -4,10 +4,10 @@
 
 template<typename T, int MAXsize>
 class TStack {
-private:
+ private:
     T data[MAXsize];
     int top;
-public:
+ public:
     TStack() : top(0) {}
     void push_back(const T& value) {
         data[top] = value;
