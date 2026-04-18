@@ -6,17 +6,13 @@
 int prioritet(char op) {
     if (op == '(') {
         return 1;
-    }
-    else if (op == ')') {
+    } else if (op == ')') {
         return 2;
-    }
-    else if (op == '-' || op == '+') {
+    } else if (op == '-' || op == '+') {
         return 3;
-    }
-    else if (op == '*' || op == '/') {
+    } else if (op == '*' || op == '/') {
         return 4;
-    }
-    else {
+    } else {
         return 0;
     }
 }
@@ -34,17 +30,15 @@ std::string infx2pstfx(const std::string& inf) {
             if (st_size == 0 || ch == '(') {
                 stack += ch;
                 st_size++;
-            }
-            else if (ch == ')') {
+            } else if (ch == ')') {
                 while (stack[st_size - 1] != '(') {
                     output_str += std::string(1, stack[st_size - 1]) + " ";
                     st_size--;
                 }
                 st_size--;
                 stack.erase(st_size);
-            }
-            else if (prioritet(stack[st_size - 1]) >= prio) {
-                while(prioritet(stack[st_size - 1]) >= prio) {
+            } else if (prioritet(stack[st_size - 1]) >= prio) {
+                while (prioritet(stack[st_size - 1]) >= prio) {
                     output_str += std::string(1, stack[st_size - 1]) + " ";
                     st_size--;
                     if (st_size == 0)
@@ -53,21 +47,18 @@ std::string infx2pstfx(const std::string& inf) {
                 stack.erase(st_size);
                 stack += ch;
                 st_size++;
-            }
-            else {
+            } else {
                 stack += ch;
                 st_size++;
             }
-        }
-        else {
+        } else {
             dig += ch;
             if (i != inf.size() - 1) {
                 if (prioritet(inf[i + 1])) {
                     output_str += dig + " ";
                     dig = "";
                 }
-            }
-            else {
+            } else {
                 output_str += dig + " ";
             }
         }
@@ -89,36 +80,31 @@ int eval(const std::string& pref) {
         ch = pref[i];
         if (ch >= '0' && ch <= '9') {
             dig += ch;
-        }
-        else if (ch == '+') {
+        } else if (ch == '+') {
             temp = stack.get_el(st_size - 2) + stack.get_el(st_size - 1);
             stack.pop_back();
             stack.pop_back();
             stack.push_back(temp);
             st_size--;
-        }
-        else if (ch == '-') {
+        } else if (ch == '-') {
             temp = stack.get_el(st_size - 2) - stack.get_el(st_size - 1);
             stack.pop_back();
             stack.pop_back();
             stack.push_back(temp);
             st_size--;
-        }
-        else if (ch == '*') {
+        } else if (ch == '*') {
             temp = stack.get_el(st_size - 2) * stack.get_el(st_size - 1);
             stack.pop_back();
             stack.pop_back();
             stack.push_back(temp);
             st_size--;
-        }
-        else if (ch == '/') {
+        } else if (ch == '/') {
             temp = stack.get_el(st_size - 2) / stack.get_el(st_size - 1);
             stack.pop_back();
             stack.pop_back();
             stack.push_back(temp);
             st_size--;
-        }
-        else {
+        } else {
             if (dig != "") {
                 stack.push_back(std::stoi(dig));
                 st_size++;
