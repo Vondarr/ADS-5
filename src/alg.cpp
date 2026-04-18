@@ -20,13 +20,12 @@ int prioritet(char op) {
 std::string infx2pstfx(const std::string& inf) {
     std::string stack = "";
     std::string output_str = "";
-    int prio;
     int st_size = 0;
-    char ch;
     std::string dig = "";
     for (int i = 0; i < inf.size(); i++) {
-        ch = inf[i];
-        if (prio = prioritet(ch)) {
+        char ch = inf[i];
+        int prio = prioritet(ch);
+        if (prio) {
             if (st_size == 0 || ch == '(') {
                 stack += ch;
                 st_size++;
@@ -72,12 +71,11 @@ std::string infx2pstfx(const std::string& inf) {
 
 int eval(const std::string& pref) {
     TStack<int, 100> stack;
-    char ch;
     std::string dig;
     int st_size = 0;
     int temp;
     for (int i = 0; i < pref.size(); i++) {
-        ch = pref[i];
+        char ch = pref[i];
         if (ch >= '0' && ch <= '9') {
             dig += ch;
         } else if (ch == '+') {
