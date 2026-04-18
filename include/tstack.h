@@ -4,7 +4,21 @@
 
 template<typename T, int size>
 class TStack {
-  // добавьте код стека
+private:
+    T data[size];
+    int top;
+public:
+    TStack() : top(0) {}
+    void push_back(const T& value) {
+        data[top] = value;
+        top++;
+    }
+    void pop_back() {
+        top--;
+    }
+    T get_el(int i) {
+        return data[i];
+    }
 };
 
 #endif  // INCLUDE_TSTACK_H_
